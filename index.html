@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#4CAF50">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Семейный бюджет">
+    <link rel="apple-touch-icon" href="icons/icon-152.png">
+    <link rel="manifest" href="manifest.json">
+    <title>Семейный бюджет</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Шапка приложения -->
+        <header class="header">
+            <h1>💰 Семейный бюджет</h1>
+            <div class="balance-card">
+                <div class="balance-label">Общий баланс</div>
+                <div class="balance-amount" id="totalBalance">0 ₽</div>
+                <div class="balance-details">
+                    <span class="income-total">Доходы: <span id="totalIncome">0</span> ₽</span>
+                    <span class="expense-total">Расходы: <span id="totalExpense">0</span> ₽</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Табы для навигации -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="transactions">📋 Операции</button>
+            <button class="tab-btn" data-tab="stats">📊 Статистика</button>
+            <button class="tab-btn" data-tab="settings">⚙️ Настройки</button>
+        </div>
+
+        <!-- Вкладка с операциями -->
+        <div class="tab-content active" id="transactions-tab">
+            <div class="add-transaction">
+                <h3>➕ Добавить операцию</h3>
+                <form id="transactionForm">
+                    <input type="text" id="desc" placeholder="Описание" required>
+                    <input type="number" id="amount" placeholder="Сумма" step="0.01" required>
+                    <select id="type">
+                        <option value="income">💰 Доход</option>
+                        <option value="expense">💸 Расход</option>
+                    </select>
+                    <select id="category">
+                        <option value="food">🍔 Еда</option>
+                        <option value="transport">🚗 Транспорт</option>
+                        <option value="housing">🏠 Жильё</option>
+                        <option value="entertainment">🎮 Развлечения</option>
+                        <option value="health">💊 Здоровье</option>
+                        <option value="other">📦 Другое</option>
+                    </select>
+                    <button type="submit">Добавить</button>
+                </form>
+            </div>
+
+            <div class="transactions-list">
+                <h3>📝 История операций</h3>
+                <div id="transactionsContainer">
+                    <div class="empty-state">Нет операций. Добавьте первую!</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Вкладка со статистикой -->
+        <div class="tab-content" id="stats-tab">
+            <div class="stats-container">
+                <h3>📈 Расходы по категориям</h3>
+                <div id="categoriesChart" class="chart-container"></div>
+                <h3>🏦 Динамика за последние 7 дней</h3>
+                <div id="trendChart" class="chart-container"></div>
+            </div>
+        </div>
+
+        <!-- Вкладка с настройками -->
+        <div class="tab-content" id="settings-tab">
+            <div class="settings-container">
+                <h3>👨‍👩‍👧‍👦 Члены семьи</h3>
+                <div id="familyMembers">
+                    <div class="family-member">
+                        <input type="text" placeholder="Имя" class="member-name" value="Папа">
+                        <button class="remove-member" disabled>×</button>
+                    </div>
+                </div>
+                <button id="addMemberBtn" class="secondary-btn">➕ Добавить участника</button>
+                
+                <h3>💾 Управление данными</h3>
+                <button id="exportDataBtn" class="secondary-btn">📤 Экспорт данных (JSON)</button>
+                <button id="importDataBtn" class="secondary-btn">📥 Импорт данных</button>
+                <input type="file" id="importFile" accept=".json" style="display: none;">
+                <button id="clearDataBtn" class="danger-btn">🗑️ Очистить все данные</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
