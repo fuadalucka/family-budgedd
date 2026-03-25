@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#4CAF50">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Семейный бюджет">
     <link rel="apple-touch-icon" href="icons/icon-152.png">
@@ -14,7 +15,6 @@
 </head>
 <body>
     <div class="app-container">
-        <!-- Шапка приложения -->
         <header class="header">
             <h1>💰 Семейный бюджет</h1>
             <div class="balance-card">
@@ -27,14 +27,12 @@
             </div>
         </header>
 
-        <!-- Табы для навигации -->
         <div class="tabs">
             <button class="tab-btn active" data-tab="transactions">📋 Операции</button>
             <button class="tab-btn" data-tab="stats">📊 Статистика</button>
             <button class="tab-btn" data-tab="settings">⚙️ Настройки</button>
         </div>
 
-        <!-- Вкладка с операциями -->
         <div class="tab-content active" id="transactions-tab">
             <div class="add-transaction">
                 <h3>➕ Добавить операцию</h3>
@@ -65,7 +63,6 @@
             </div>
         </div>
 
-        <!-- Вкладка со статистикой -->
         <div class="tab-content" id="stats-tab">
             <div class="stats-container">
                 <h3>📈 Расходы по категориям</h3>
@@ -75,16 +72,10 @@
             </div>
         </div>
 
-        <!-- Вкладка с настройками -->
         <div class="tab-content" id="settings-tab">
             <div class="settings-container">
                 <h3>👨‍👩‍👧‍👦 Члены семьи</h3>
-                <div id="familyMembers">
-                    <div class="family-member">
-                        <input type="text" placeholder="Имя" class="member-name" value="Папа">
-                        <button class="remove-member" disabled>×</button>
-                    </div>
-                </div>
+                <div id="familyMembers"></div>
                 <button id="addMemberBtn" class="secondary-btn">➕ Добавить участника</button>
                 
                 <h3>💾 Управление данными</h3>
@@ -95,11 +86,35 @@
             </div>
         </div>
     </div>
-
-     <footer class="footer">
+    
+    <footer class="footer">
         <p>Made by Kirill Edelbacher</p>
     </footer>
 
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
+        import { getFirestore, doc, getDoc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js";
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyA8aw7iQh3sFaq402fFkf1swqBL0YPECwY",
+            authDomain: "family-budget-app-e9a8a.firebaseapp.com",
+            projectId: "family-budget-app-e9a8a",
+            storageBucket: "family-budget-app-e9a8a.firebasestorage.app",
+            messagingSenderId: "649746913063",
+            appId: "1:649746913063:web:8c3acbba07dd39cf793b02"
+        };
+        
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+        
+        window.firebase = { db, auth, signInAnonymously, onAuthStateChanged, doc, getDoc, setDoc, onSnapshot };
+        
+        console.log('🔥 Firebase загружен!');
+    </script>
+    
     <script src="script.js"></script>
 </body>
 </html>
