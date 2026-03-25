@@ -110,7 +110,16 @@
         const db = getFirestore(app);
         const auth = getAuth(app);
         
-        window.firebase = { db, auth, signInAnonymously, onAuthStateChanged, doc, getDoc, setDoc, onSnapshot };
+        window.firebase = { 
+            db, 
+            auth, 
+            signInAnonymously, 
+            onAuthStateChanged, 
+            doc, 
+            getDoc, 
+            setDoc, 
+            onSnapshot 
+        };
         
         console.log('🔥 Firebase загружен!');
     </script>
